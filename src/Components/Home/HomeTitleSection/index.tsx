@@ -1,7 +1,16 @@
+import { useContext } from "react";
+import { GlobalContext } from "../../../ContextStore/GlobalContext";
+
 const HomeTitleSection = () => {
+  const { ActiveSubmit } = useContext(GlobalContext);
+
   return (
     <>
-      <div className="flex flex-col items-center text-7xl">
+      <div
+        className={`flex flex-col items-center text-7xl ${
+          ActiveSubmit ? "block" : "hidden"
+        }`}
+      >
         <h1 className="text-white font-bold">Weather</h1>
         <h1 className="font-bold text-[#DDB130]">ForeCasts</h1>
       </div>
