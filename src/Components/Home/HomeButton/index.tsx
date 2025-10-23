@@ -8,6 +8,8 @@ const HomeButton = () => {
   const data = useGetUsersQuery(SearchText);
   const SubmitClick = async () => {
     SetWeatherData(data.currentData);
+    console.log(data.data);
+
     SetActiveSubmit(!ActiveSubmit);
   };
   return (

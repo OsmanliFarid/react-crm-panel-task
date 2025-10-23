@@ -81,7 +81,7 @@ const WeatherImage = () => {
           <h1 className="">Today</h1>
           <h1 className="">{day}</h1>
         </div>
-        <div className="grid grid-cols-3 px-4 pt-4">
+        <div className="grid grid-cols-3 justify-items-center overflow-y-hidden h-[150px] px-4 pt-4">
           {data.map((item: any, i) => {
             console.log(data);
 
