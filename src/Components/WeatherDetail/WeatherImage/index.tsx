@@ -5,7 +5,7 @@ import axios from "axios";
 const WeatherImage = () => {
   const { WeatherData, SearchText } = useContext(GlobalContext);
   const [data, setdata] = useState([]);
-  const [date, setdate] = useState<Date | null>(null);
+  const [day, setday] = useState<string | null>("");
   let weatherImg = "/images/default.png";
   const API_KEY = "53123f2f232fdc830f13c2068acda716";
   if (WeatherData?.weather?.[0]?.main) {
@@ -37,11 +37,18 @@ const WeatherImage = () => {
         `https://api.openweathermap.org/data/2.5/forecast?q=${SearchText}&appid=${API_KEY}&units=metric`
       )
       .then(({ data }) => {
-        setdata(data);
-        const now = new Date();
-        setdate(now);
+        let now = new Date();
+        let date = now.toLocaleString().split(" ")[0];
+        let date2 = date.split(".")[0];
+        setday(date2);
+        if (data) {
+          const filtered = data.list.filter((item: any) =>
+            item.dt_txt.includes(date2)
+          );
+          console.log(filtered);
+        }
       });
-  }, [SearchText]);
+  }, [WeatherData]);
 
   return (
     <>
@@ -74,9 +81,9 @@ const WeatherImage = () => {
         <img src="../public/images/house.png" alt="" />
       </div>
       <div className="bg-[#3E2D8F] h-50  w-[95%] mx-auto rounded-2xl">
-        <div className="">
+        <div className="border-b-2 border-[#8E78C8] flex justify-between">
           <h1>Today</h1>
-          <h1>{date?.toLocaleString()}</h1>
+          <h1>{day}</h1>
         </div>
       </div>
     </>

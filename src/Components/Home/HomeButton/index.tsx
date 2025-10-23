@@ -1,28 +1,14 @@
 import { useContext } from "react";
 import { GlobalContext } from "../../../ContextStore/GlobalContext";
-import axios from "axios";
+import { useGetUsersQuery } from "../../../Features/WeatherApi";
 
 const HomeButton = () => {
-  const { ActiveSubmit, SetActiveSubmit, SearchText, SetWeatherData } =
+  const { ActiveSubmit, SetActiveSubmit, SetWeatherData, SearchText } =
     useContext(GlobalContext);
-  const API_URL_KEY = "53123f2f232fdc830f13c2068acda716";
+  const data = useGetUsersQuery(SearchText);
   const SubmitClick = async () => {
-    console.log(SearchText);
+    SetWeatherData(data.currentData);
     SetActiveSubmit(!ActiveSubmit);
-
-    try {
-      const data = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${SearchText}&appid=${API_URL_KEY}&units=metric`
-      );
-      SetWeatherData(data.data);
-      console.log("Şəhər:", data.data.name);
-      console.log("Temperatur:", data.data.main.temp, "°C");
-      console.log("Hava vəziyyəti:", data.data.weather[0].description);
-      console.log("Rütubət:", data.data.main.humidity, "%");
-      console.log("Şimal-qərb küləyi:", data.data.wind.speed, "m/s");
-    } catch (err) {
-      alert("not found");
-    }
   };
   return (
     <div className="flex justify-center mt-10">
