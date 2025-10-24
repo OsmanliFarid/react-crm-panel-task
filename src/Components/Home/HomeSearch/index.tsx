@@ -12,7 +12,7 @@ const HomeSearch = () => {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           SetSearchText(e.target.value)
         }
-        placeholder="local..."
+        placeholder="local"
         className="w-[370px] h-[55px] rounded-3xl px-2 text-2xl text-white outline-none border-2 border-amber-300"
       />
     </div>
